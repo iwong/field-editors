@@ -91,6 +91,20 @@ export default {
         }
       },
     },
+
+    [BLOCKS.BLOCKQUOTE]: {
+      nodes: [
+        {
+          match: [CONTAINERS[BLOCKS.BLOCKQUOTE].map((type) => ({ type }))],
+          min: 1,
+        },
+      ],
+      normalize: (editor, error) => {
+        if (error.code === 'child_type_invalid') {
+          return editor.unwrapBlockByKey(error.node.key, BLOCKS.BLOCKQUOTE);
+        }
+      },
+    },
   },
 
   inlines: {

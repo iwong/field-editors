@@ -81,6 +81,7 @@ const createFragment: Creator = (_, __, children) => {
 export const jsx = createHyperscript({
   elements: {
     hquote: { type: BLOCKS.QUOTE, data: {} },
+    hblockquote: { type: BLOCKS.BLOCKQUOTE, data: {} },
     hh1: { type: BLOCKS.HEADING_1, data: {} },
     hh2: { type: BLOCKS.HEADING_2, data: {} },
     hh3: { type: BLOCKS.HEADING_3, data: {} },

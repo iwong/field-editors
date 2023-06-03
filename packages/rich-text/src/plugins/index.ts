@@ -7,6 +7,7 @@ import {
 import { createDeserializeDocxPlugin } from '@udecode/plate-serializer-docx';
 
 import { PlatePlugin } from '../internal/types';
+import { createBlockquotePlugin } from './Blockquote';
 import { createSoftBreakPlugin, createExitBreakPlugin, createResetNodePlugin } from './Break';
 import { createCommandPalettePlugin } from './CommandPalette';
 import { isCommandPromptPluginEnabled } from './CommandPalette/useCommands';
@@ -61,6 +62,7 @@ export const getPlugins = (
   createTablePlugin(),
   createEmbeddedEntryBlockPlugin(sdk),
   createEmbeddedAssetBlockPlugin(sdk),
+  createBlockquotePlugin(),
 
   // Inline elements
   createHyperlinkPlugin(sdk),

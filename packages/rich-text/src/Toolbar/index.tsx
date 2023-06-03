@@ -11,6 +11,7 @@ import { useContentfulEditor } from '../ContentfulEditorProvider';
 import { isNodeTypeSelected } from '../helpers/editor';
 import { isMarkEnabled, isNodeTypeEnabled } from '../helpers/validations';
 import { isMarkActive } from '../internal/queries';
+import { ToolbarBlockquoteButton } from '../plugins/Blockquote';
 import { ToolbarHeadingButton } from '../plugins/Heading';
 import { ToolbarHrButton } from '../plugins/Hr';
 import { ToolbarHyperlinkButton } from '../plugins/Hyperlink';
@@ -116,9 +117,10 @@ const Toolbar = ({ isDisabled }: ToolbarProps) => {
   const validationInfo = React.useMemo(() => getValidationInfo(sdk.field), [sdk.field]);
   const isListSelected =
     isNodeTypeSelected(editor, BLOCKS.UL_LIST) || isNodeTypeSelected(editor, BLOCKS.OL_LIST);
-  const isBlockquoteSelected = isNodeTypeSelected(editor, BLOCKS.QUOTE);
+  const isBlockquoteSelected = isNodeTypeSelected(editor, BLOCKS.BLOCKQUOTE);
+  const isQuoteSelected = isNodeTypeSelected(editor, BLOCKS.QUOTE);
   const shouldDisableTables =
-    isDisabled || !canInsertBlocks || isListSelected || isBlockquoteSelected;
+    isDisabled || !canInsertBlocks || isListSelected || isBlockquoteSelected || isQuoteSelected;
 
   // We only show the dropdown when: whenever at least bold , italic and underline are available; If nothing that would go inside the dropdown is available, we hide it
   const boldItalicUnderlineAvailable =
@@ -171,6 +173,9 @@ const Toolbar = ({ isDisabled }: ToolbarProps) => {
         {isNodeTypeEnabled(sdk.field, BLOCKS.QUOTE) && (
           <ToolbarQuoteButton isDisabled={isDisabled || !canInsertBlocks} />
         )}
+        {isNodeTypeEnabled(sdk.field, BLOCKS.BLOCKQUOTE) && (
+          <ToolbarBlockquoteButton isDisabled={isDisabled || !canInsertBlocks} />
+        )}
         {isNodeTypeEnabled(sdk.field, BLOCKS.HR) && (
           <ToolbarHrButton isDisabled={isDisabled || !canInsertBlocks} />
         )}
@@ -200,7 +205,7 @@ function getValidationInfo(field: FieldExtensionSDK['field']): {
   );
 
   const isAnyBlockFormattingEnabled = someWithValidation(
-    [BLOCKS.UL_LIST, BLOCKS.OL_LIST, BLOCKS.QUOTE, BLOCKS.HR],
+    [BLOCKS.UL_LIST, BLOCKS.OL_LIST, BLOCKS.QUOTE, BLOCKS.HR, BLOCKS.BLOCKQUOTE],
     isNodeTypeEnabled
   );
 

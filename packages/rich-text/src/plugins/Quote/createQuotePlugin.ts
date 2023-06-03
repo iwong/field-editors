@@ -22,7 +22,7 @@ export function createQuotePlugin(): PlatePlugin {
     deserializeHtml: {
       rules: [
         {
-          validNodeName: 'BLOCKQUOTE',
+          validNodeName: 'QUOTE',
         },
       ],
     },

@@ -59,6 +59,7 @@ describe('Toolbar', () => {
         'dropdown',
         'hyperlink',
         'quote',
+        'blockquote',
         'ul',
         'ol',
         'hr',
